@@ -16,7 +16,7 @@ public class Slides {
 
     private static double slidesTargetPos = 0;
 
-    private PID PIDFslides = new PID(new PIDFController(p, i, d, f));
+    private PID PIDFslides = new PID(new PIDFController (p, i, d, f));
 
     public Slides (HardwareMap hardwareMap){
 

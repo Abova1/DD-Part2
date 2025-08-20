@@ -18,9 +18,9 @@ public class DT {
 
     public DT (HardwareMap hardwareMap) {
 
-        FL = hardwareMap.get(DcMotorEx.class, "BR");
-        BL = hardwareMap.get(DcMotorEx.class, "BR");
-        FR = hardwareMap.get(DcMotorEx.class, "BR");
+        FL = hardwareMap.get(DcMotorEx.class, "FL");
+        BL = hardwareMap.get(DcMotorEx.class, "BL");
+        FR = hardwareMap.get(DcMotorEx.class, "FR");
         BR = hardwareMap.get(DcMotorEx.class, "BR");
 
         FR.setDirection(DcMotorSimple.Direction.REVERSE);

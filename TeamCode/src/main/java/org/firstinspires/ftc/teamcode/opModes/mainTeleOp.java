@@ -13,6 +13,8 @@ public class mainTeleOp extends LinearOpMode {
     private Slides Slides;
     private ControllerWrapper Driver, Operator;
 
+    private CommandScheduler scheduler;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -22,8 +24,8 @@ public class mainTeleOp extends LinearOpMode {
         Slides = new Slides(hardwareMap);
 
 
-        Driver = new ControllerWrapper(gamepad1);
-        Operator = new ControllerWrapper(gamepad2);
+        Driver = new ControllerWrapper(gamepad1, scheduler);
+        Operator = new ControllerWrapper(gamepad2, scheduler);
 
         waitForStart();
 
@@ -32,8 +34,6 @@ public class mainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             Slides.setPIDF();
-            Driver.Update();
-            Operator.Update();
 
             DT.Drive(-Driver.getY(), Driver.getX() * 1.1, Driver.getRx());
 

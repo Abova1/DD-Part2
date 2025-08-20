@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.util;
 
-import com.qualcomm.robotcore.hardware.Gamepad;
-
 import org.firstinspires.ftc.teamcode.subsystems.*;
 
 public class TeleHandler {
 
-    private States state = States.Middle;
+    private States state = States.REGULAR;
     private ControllerWrapper Driver, Operator;
     private Arm arm;
+
+    private CommandScheduler scheduler;
 
     public TeleHandler(Arm arm, ControllerWrapper driver){
 
@@ -19,49 +19,40 @@ public class TeleHandler {
 
     public void TeleOp (){
 
-        Driver.Update();
-
-        if(Driver.x()){
-
-            state = States.Sample;
-
-        }
-
-        if(Driver.b()){
-
-            state = States.Neutral;
-
-        }
-
-        if(Driver.a()){
-
-            state = States.Middle;
 
 
-        }
+        switch (state){
+            case REGULAR:
 
+                Driver.buttonPressed(Driver :: a, () -> arm.armCommand(arm.middle()));
 
+                Driver.buttonPressed(Driver :: x, () -> arm.armCommand(arm.left()));
 
-        switch(state){
+                Driver.buttonPressed(Driver :: b, () -> arm.armCommand(arm.right()));
 
-            case Sample:
+                if(Driver.y()){
 
-                arm.left();
+                    state = States.INVERTED;
 
-                break;
-            case Neutral:
+                }
+            break;
 
-                arm.right();
+            case INVERTED:
+                Driver.buttonPressed(Driver :: a, () -> arm.armCommand(arm.InvertedMiddle()));
 
-                break;
-            case Middle:
+                Driver.buttonPressed(Driver :: x, () -> arm.armCommand(arm.InvertedLeft()));
 
-                arm.middle();
+                Driver.buttonPressed(Driver :: b, () -> arm.armCommand(arm.InvertedRight()));
 
-                break;
+                if(Driver.y()){
 
+                    state = States.REGULAR;
+
+                }
+            break;
 
         }
+
 
 
 
