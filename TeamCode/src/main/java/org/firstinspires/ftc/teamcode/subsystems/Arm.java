@@ -46,37 +46,149 @@ public class Arm {
     }
 
 
-    public Command armCommand(double pos) {
-
-        pos = Math.max(0, Math.min(1 , pos));
-
-        double finalPos = pos;
+    public Command ServoToMiddle(){
         return new Command() {
-
             @Override
             public void init() {
-
-                servo.setPosition(finalPos);
-
+                servo.setPosition(middle());
             }
 
             @Override
             public void execute() {
+
             }
 
             @Override
             public boolean isFinished() {
-                return true;
+                return false;
             }
 
             @Override
             public void end() {
 
             }
-
-
         };
-
     }
+
+    public Command ServoToLeft(){
+        return new Command() {
+            @Override
+            public void init() {
+                servo.setPosition(left());
+            }
+
+            @Override
+            public void execute() {
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public void end() {
+
+            }
+        };
+    }
+
+    public Command ServoToRight(){
+        return new Command() {
+            @Override
+            public void init() {
+                servo.setPosition(right());
+            }
+
+            @Override
+            public void execute() {
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public void end() {
+
+            }
+        };
+    }
+
+    public Command InvertedServoToMiddle(){
+        return new Command() {
+            @Override
+            public void init() {
+                servo.setPosition(InvertedMiddle());
+            }
+
+            @Override
+            public void execute() {
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public void end() {
+
+            }
+        };
+    }
+
+    public Command InvertedServoToLeft(){
+        return new Command() {
+            @Override
+            public void init() {
+                servo.setPosition(InvertedLeft());
+            }
+
+            @Override
+            public void execute() {
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public void end() {
+
+            }
+        };
+    }
+
+    public Command InvertedServoToRight(){
+        return new Command() {
+            @Override
+            public void init() {
+                servo.setPosition(InvertedRight());
+            }
+
+            @Override
+            public void execute() {
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public void end() {
+
+            }
+        };
+    }
+
 
 }

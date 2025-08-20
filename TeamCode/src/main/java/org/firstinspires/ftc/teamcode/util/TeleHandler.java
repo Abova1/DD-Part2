@@ -24,11 +24,11 @@ public class TeleHandler {
         switch (state){
             case REGULAR:
 
-                Driver.buttonPressed(Driver :: a, () -> arm.armCommand(arm.middle()));
+                Driver.buttonPressed(Driver :: a, () -> arm.ServoToMiddle());
 
-                Driver.buttonPressed(Driver :: x, () -> arm.armCommand(arm.left()));
+                Driver.buttonPressed(Driver :: x, () -> arm.ServoToLeft());
 
-                Driver.buttonPressed(Driver :: b, () -> arm.armCommand(arm.right()));
+                Driver.buttonPressed(Driver :: b, () -> arm.ServoToRight());
 
                 if(Driver.y()){
 
@@ -38,11 +38,11 @@ public class TeleHandler {
             break;
 
             case INVERTED:
-                Driver.buttonPressed(Driver :: a, () -> arm.armCommand(arm.InvertedMiddle()));
+                Driver.buttonPressed(Driver :: a, () -> arm.InvertedServoToMiddle());
 
-                Driver.buttonPressed(Driver :: x, () -> arm.armCommand(arm.InvertedLeft()));
+                Driver.buttonPressed(Driver :: x, () -> arm.InvertedServoToLeft());
 
-                Driver.buttonPressed(Driver :: b, () -> arm.armCommand(arm.InvertedRight()));
+                Driver.buttonPressed(Driver :: b, () -> arm.InvertedServoToRight());
 
                 if(Driver.y()){
 
