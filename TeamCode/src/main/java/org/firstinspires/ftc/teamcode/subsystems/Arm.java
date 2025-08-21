@@ -3,13 +3,9 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.util.States;
 import org.firstinspires.ftc.teamcode.util.*;
 
 public class Arm {
-
-    private States state;
-
 
     public Servo servo;
 
@@ -49,96 +45,87 @@ public class Arm {
     public Command ServoToMiddle(){
         return new Command() {
             @Override
-            public void init() {
-                servo.setPosition(middle());
-            }
+            public void init() {}
 
             @Override
             public void execute() {
+
+                servo.setPosition(middle());
 
             }
 
             @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 
     public Command ServoToLeft(){
         return new Command() {
             @Override
-            public void init() {
-                servo.setPosition(left());
-            }
+            public void init() {}
 
             @Override
             public void execute() {
+
+                servo.setPosition(left());
 
             }
 
             @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 
     public Command ServoToRight(){
         return new Command() {
             @Override
-            public void init() {
-                servo.setPosition(right());
-            }
+            public void init() {}
 
             @Override
             public void execute() {
+                servo.setPosition(right());
 
             }
 
             @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 
     public Command InvertedServoToMiddle(){
         return new Command() {
             @Override
-            public void init() {
-                servo.setPosition(InvertedMiddle());
-            }
+            public void init() {}
 
             @Override
             public void execute() {
+
+                servo.setPosition(InvertedMiddle());
 
             }
 
             @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 
@@ -151,42 +138,36 @@ public class Arm {
 
             @Override
             public void execute() {
-
+                servo.setPosition(InvertedLeft());
             }
 
             @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 
     public Command InvertedServoToRight(){
         return new Command() {
             @Override
-            public void init() {
+            public void init() {}
+
+            @Override
+            public void execute() {
                 servo.setPosition(InvertedRight());
             }
 
             @Override
-            public void execute() {
-
-            }
-
-            @Override
             public boolean isFinished() {
-                return false;
+                return true;
             }
 
             @Override
-            public void end() {
-
-            }
+            public void end() {}
         };
     }
 

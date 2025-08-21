@@ -17,24 +17,21 @@ public class TeleHandler {
 
     }
 
+    public States getState(){
+        return state;
+    }
+
     public void TeleOp (){
 
-
-
         switch (state){
+
             case REGULAR:
 
                 Driver.buttonPressed(Driver :: a, () -> arm.ServoToMiddle());
 
                 Driver.buttonPressed(Driver :: x, () -> arm.ServoToLeft());
 
-                Driver.buttonPressed(Driver :: b, () -> arm.ServoToRight());
-
-                if(Driver.y()){
-
-                    state = States.INVERTED;
-
-                }
+                Driver.buttonPressed(Driver :: b, () -> arm.ServoToRight() , () -> state = States.INVERTED);
             break;
 
             case INVERTED:
@@ -42,23 +39,11 @@ public class TeleHandler {
 
                 Driver.buttonPressed(Driver :: x, () -> arm.InvertedServoToLeft());
 
-                Driver.buttonPressed(Driver :: b, () -> arm.InvertedServoToRight());
-
-                if(Driver.y()){
-
-                    state = States.REGULAR;
-
-                }
+                Driver.buttonPressed(Driver :: b, () -> arm.InvertedServoToRight(), () -> state = States.REGULAR);
             break;
 
         }
 
-
-
-
-
     }
-
-
 
 }

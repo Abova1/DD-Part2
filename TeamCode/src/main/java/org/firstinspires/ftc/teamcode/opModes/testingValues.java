@@ -5,8 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.util.Command;
 import org.firstinspires.ftc.teamcode.util.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.ControllerWrapper;
+import org.firstinspires.ftc.teamcode.util.States;
 import org.firstinspires.ftc.teamcode.util.TeleHandler;
 
 @TeleOp
@@ -16,8 +18,6 @@ public class testingValues extends LinearOpMode {
     private Arm arm;
     private TeleHandler teleHandler;
     private CommandScheduler scheduler;
-
-
     private ElapsedTime timer;
 
 
@@ -28,35 +28,32 @@ public class testingValues extends LinearOpMode {
         Driver = new ControllerWrapper(gamepad1, scheduler);
         arm = new Arm(hardwareMap);
 
-
         teleHandler = new TeleHandler(arm, Driver);
 
-        long start = System.nanoTime();
         timer = new ElapsedTime();
 
         waitForStart();
         if (isStopRequested()) return;
 
-        while (opModeIsActive()) {
 
+        while (opModeIsActive()) {
 
             teleHandler.TeleOp();
             scheduler.run();
 
-            if(timer.milliseconds() > 125) /* Updates every 125 ms*/ {
 
-                telemetry.addData("Loop time / ms",(System.nanoTime() - start) / 1000000);
-                telemetry.addData("button a", Driver.a());
-                telemetry.addData("button b", Driver.b());
-                telemetry.addData("button x", Driver.x());
-                telemetry.addData("button y", Driver.y());
+            if(timer.milliseconds() > 175) /* Updates every 175 ms*/ {
+
+                telemetry.addData("Current State", teleHandler.getState());
+
                 telemetry.addData("ServoPos", arm.getPos());
-
                 telemetry.update();
 
                 timer.reset();
             }
 
         }
+
     }
+
 }

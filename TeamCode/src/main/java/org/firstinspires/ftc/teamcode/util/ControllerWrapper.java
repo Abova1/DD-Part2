@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.util;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 /*
@@ -27,6 +28,50 @@ public class ControllerWrapper {
         }
 
     }
+
+    public void buttonPressed(BooleanSupplier wasPressed, Supplier<Command> commandSupplier, Runnable action){
+
+        if(wasPressed.getAsBoolean()){
+            scheduler.schedule(commandSupplier.get());
+            action.run();
+        }
+
+    }
+
+    public void buttonPressed(BooleanSupplier wasPressed, Runnable action){
+
+        if(wasPressed.getAsBoolean()){
+            action.run();
+        }
+
+    }
+
+    public void triggerPressed(DoubleSupplier wasPressed, double threshold, Supplier<Command> commandSupplier){
+
+        if(wasPressed.getAsDouble() > threshold){
+            scheduler.schedule(commandSupplier.get());
+        }
+
+    }
+
+    public void triggerPressed(DoubleSupplier wasPressed, double threshold, Supplier<Command> commandSupplier, Runnable action){
+
+        if(wasPressed.getAsDouble() > threshold){
+            scheduler.schedule(commandSupplier.get());
+            action.run();
+        }
+
+    }
+
+    public void triggerPressed(DoubleSupplier wasPressed, double threshold, Runnable action){
+
+        if(wasPressed.getAsDouble() > threshold){
+            action.run();
+        }
+
+    }
+
+
 
 
     public double getY() {
@@ -86,7 +131,5 @@ public class ControllerWrapper {
     }
 
 
-
-
-
+    
 }
