@@ -21,6 +21,7 @@ public class testingValues extends LinearOpMode {
     private ElapsedTime timer;
 
 
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -35,14 +36,12 @@ public class testingValues extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-
         while (opModeIsActive()) {
 
             teleHandler.TeleOp();
             scheduler.run();
 
-
-            if(timer.milliseconds() > 175) /* Updates every 175 ms*/ {
+            if(timer.milliseconds() > 175) /* Updates every 175 ms for less input lag*/ {
 
                 telemetry.addData("Current State", teleHandler.getState());
 

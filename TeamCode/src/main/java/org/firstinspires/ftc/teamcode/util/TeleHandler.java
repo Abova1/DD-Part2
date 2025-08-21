@@ -35,6 +35,7 @@ public class TeleHandler {
             break;
 
             case INVERTED:
+
                 Driver.buttonPressed(Driver :: a, () -> arm.InvertedServoToMiddle());
 
                 Driver.buttonPressed(Driver :: x, () -> arm.InvertedServoToLeft());

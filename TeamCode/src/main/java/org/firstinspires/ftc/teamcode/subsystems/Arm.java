@@ -60,7 +60,7 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 
@@ -82,7 +82,7 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 
@@ -93,6 +93,7 @@ public class Arm {
 
             @Override
             public void execute() {
+
                 servo.setPosition(right());
 
             }
@@ -103,7 +104,7 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 
@@ -125,20 +126,20 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 
     public Command InvertedServoToLeft(){
         return new Command() {
             @Override
-            public void init() {
-                servo.setPosition(InvertedLeft());
-            }
+            public void init() {}
 
             @Override
             public void execute() {
+
                 servo.setPosition(InvertedLeft());
+
             }
 
             @Override
@@ -147,7 +148,7 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 
@@ -167,7 +168,7 @@ public class Arm {
             }
 
             @Override
-            public void end() {}
+            public void end(){}
         };
     }
 

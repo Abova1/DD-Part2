@@ -74,16 +74,19 @@ public class ControllerWrapper {
 
 
 
-    public double getY() {
+    public double getLy() {
         return gamepad.left_stick_y;
     }
 
-    public double getX() {
+    public double getLx(){
         return gamepad.left_stick_x;
     }
 
     public double getRx() {
         return gamepad.right_stick_x;
+    }
+    public double getRy() {
+        return gamepad.right_stick_y;
     }
 
     /*===============================| Controls |===========================*/

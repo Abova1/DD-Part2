@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.subsystems.*;
 import org.firstinspires.ftc.teamcode.util.*;
@@ -27,6 +28,7 @@ public class mainTeleOp extends LinearOpMode {
         Driver = new ControllerWrapper(gamepad1, scheduler);
         Operator = new ControllerWrapper(gamepad2, scheduler);
 
+
         waitForStart();
 
         if (isStopRequested()) return;
@@ -35,7 +37,7 @@ public class mainTeleOp extends LinearOpMode {
 
             Slides.setPIDF();
 
-            DT.Drive(-Driver.getY(), Driver.getX() * 1.1, Driver.getRx());
+            DT.Drive(-Driver.getLy(), Driver.getLx() * 1.1, Driver.getRx());
 
 
         }
