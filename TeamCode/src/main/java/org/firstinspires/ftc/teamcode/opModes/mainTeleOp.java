@@ -2,10 +2,10 @@ package org.firstinspires.ftc.teamcode.opModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.subsystems.*;
 import org.firstinspires.ftc.teamcode.util.*;
+import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 
 @TeleOp
 public class mainTeleOp extends LinearOpMode {
@@ -23,10 +23,6 @@ public class mainTeleOp extends LinearOpMode {
 
         DT = new DT(hardwareMap);
         Slides = new Slides(hardwareMap);
-
-
-        Driver = new ControllerWrapper(gamepad1, scheduler);
-        Operator = new ControllerWrapper(gamepad2, scheduler);
 
 
         waitForStart();

@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.util;
 
 import org.firstinspires.ftc.teamcode.subsystems.*;
+import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
+import org.firstinspires.ftc.teamcode.util.Command.SequentialCommand;
+
 
 public class TeleHandler {
 
@@ -8,12 +11,15 @@ public class TeleHandler {
     private ControllerWrapper Driver, Operator;
     private Arm arm;
 
+    private Slides slides;
+
     private CommandScheduler scheduler;
 
-    public TeleHandler(Arm arm, ControllerWrapper driver){
+    public TeleHandler(Arm arm, Slides slides, ControllerWrapper driver ){
 
         this.Driver = driver;
         this.arm = arm;
+        this.slides = slides;
 
     }
 
@@ -23,15 +29,28 @@ public class TeleHandler {
 
     public void TeleOp (){
 
+
+        slides.RunPid();
+
+
+
         switch (state){
 
             case REGULAR:
 
-                Driver.buttonPressed(Driver :: a, () -> arm.ServoToMiddle());
+                Driver.buttonPressed(Driver :: a, arm::ServoToMiddle );
 
-                Driver.buttonPressed(Driver :: x, () -> arm.ServoToLeft());
+                Driver.buttonPressed(Driver :: x, arm::ServoToLeft);
 
-                Driver.buttonPressed(Driver :: b, () -> arm.ServoToRight() , () -> state = States.INVERTED);
+                Driver.buttonPressed(Driver :: b, arm::ServoToRight , ()-> state = States.INVERTED);
+
+                Driver.buttonPressed(Driver :: y, () ->
+                        new SequentialCommand(
+                                slides.moveToTarget(),
+                                arm.ServoToMiddle()
+                        )
+                );
+
             break;
 
             case INVERTED:

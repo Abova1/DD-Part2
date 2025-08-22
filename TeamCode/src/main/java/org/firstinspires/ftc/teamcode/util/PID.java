@@ -5,12 +5,12 @@ import com.arcrobotics.ftclib.controller.PIDFController;
 
 public class PID {
 
-    public PIDFController PIDF;
+    private PIDFController PIDF;
 
 
-    public PID(PIDFController PIDF){
+    public PID(PIDFController pidf) {
 
-        this.PIDF = PIDF;
+        this.PIDF = pidf;
 
     }
 

@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.util.*;
+import org.firstinspires.ftc.teamcode.util.Command.Command;
 
 public class Arm {
 
@@ -13,8 +13,17 @@ public class Arm {
         servo = hardwareMap.servo.get("servo");
     }
 
+    public void init(){
+        //put whatever the values are
+        servo.setPosition(initPos());
+    }
+
     public double getPos(){
         return servo.getPosition();
+    }
+
+    public double initPos(){
+        return 0;
     }
 
     public double middle() {

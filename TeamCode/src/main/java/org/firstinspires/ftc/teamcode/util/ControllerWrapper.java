@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode.util;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.util.Command.Command;
+import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
@@ -71,8 +74,7 @@ public class ControllerWrapper {
 
     }
 
-
-
+    /*===============================| Controls |===========================*/
 
     public double getLy() {
         return gamepad.left_stick_y;
@@ -89,7 +91,6 @@ public class ControllerWrapper {
         return gamepad.right_stick_y;
     }
 
-    /*===============================| Controls |===========================*/
 
     public boolean a(){
         return gamepad.aWasPressed();

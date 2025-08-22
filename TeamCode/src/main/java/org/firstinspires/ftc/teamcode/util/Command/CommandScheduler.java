@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.util;
+package org.firstinspires.ftc.teamcode.util.Command;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class CommandScheduler {
             command.execute();
 
             if(command.isFinished()){
-                command.end();
+
                 iterator.remove();
             }
 
