@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystems.*;
 import org.firstinspires.ftc.teamcode.util.*;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 
-@TeleOp
+@TeleOp (name="Main TeleOp", group="OpModes")
 public class mainTeleOp extends LinearOpMode {
 
     private DT DT;

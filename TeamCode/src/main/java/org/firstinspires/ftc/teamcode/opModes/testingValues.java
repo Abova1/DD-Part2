@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.ControllerWrapper;
 import org.firstinspires.ftc.teamcode.util.TeleHandler;
 
-@TeleOp
+@TeleOp (name="Test OpMode", group="OpModes")
 public class testingValues extends LinearOpMode {
 
     private ControllerWrapper Driver, Operator;

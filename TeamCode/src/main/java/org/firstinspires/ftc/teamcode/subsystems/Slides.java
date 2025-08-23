@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.util.PID;
 
 public class Slides {
 
-    private DcMotorEx motor1;
+    private DcMotorEx motor1, motor2;
 
     private static double p = 0.04, i = 0, d = 5e-7, f = 0;
 
@@ -22,7 +22,9 @@ public class Slides {
     public Slides(HardwareMap hardwareMap){
 
         motor1 = hardwareMap.get(DcMotorEx.class, "motor0");
+        motor2 = hardwareMap.get(DcMotorEx.class, "motor1");
         motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         reset();
 
@@ -30,7 +32,9 @@ public class Slides {
 
     public void reset(){
         motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         targetPos = 0;
     }
 
@@ -60,6 +64,7 @@ public class Slides {
         double Power = calc;
 
         motor1.setPower(Power);
+        motor2.setPower(Power);
 
     }
 
@@ -82,7 +87,7 @@ public class Slides {
             public boolean isFinished() {
 
                 int error = (int) Math.abs(getPos() - targetPos);
-                return error <= 30;
+                return error <= 20;
 
             }
 
@@ -95,5 +100,74 @@ public class Slides {
         };
     }
 
+    public Command diffMove(){
+        return new Command(){
+
+            @Override
+            public void init() {
+
+            }
+
+            @Override
+            public void execute() {
+
+                targetPos = 0;
+
+            }
+
+            @Override
+            public boolean isFinished() {
+
+                int error = (int) Math.abs(getPos() - targetPos);
+                return error <= 20;
+
+            }
+
+            @Override
+            public void end() {
+
+            }
+
+
+        };
+    }
+
+    public Command slideAdjust(boolean forward){
+        return new Command(){
+
+            @Override
+            public void init() {
+
+
+            }
+
+            @Override
+            public void execute() {
+
+                if(forward) {
+                    targetPos = getPos() + 10;
+                }
+
+                else if(!forward){
+                    targetPos = getPos() - 10;
+                }
+
+            }
+
+            @Override
+            public boolean isFinished() {
+
+                return targetPos == targetPos;
+
+            }
+
+            @Override
+            public void end() {
+
+            }
+
+
+        };
+    }
 
 }

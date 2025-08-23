@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @Config
 
 
-@TeleOp
+@TeleOp(name="Slide Tuner", group="tuners")
 
 public class SlideTuner extends OpMode {
 
