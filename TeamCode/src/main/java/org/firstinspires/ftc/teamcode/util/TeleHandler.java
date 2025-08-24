@@ -2,24 +2,23 @@ package org.firstinspires.ftc.teamcode.util;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.*;
+import org.firstinspires.ftc.teamcode.subsystems.Arm.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Slides.Slides;
 import org.firstinspires.ftc.teamcode.util.Command.Command;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.Command.ParallelCommand;
-import org.firstinspires.ftc.teamcode.util.Command.SequentialCommand;
 
 
 public class TeleHandler {
 
     private States state = States.REGULAR;
-    private ControllerWrapper Driver, Operator;
+    private Controller Driver, Operator;
     private Arm arm;
     private Slides slides;
     private ElapsedTime timer = new ElapsedTime();
-
     private CommandScheduler scheduler;
 
-    public TeleHandler(Arm arm, Slides slides, ControllerWrapper driver ){
+    public TeleHandler(Arm arm, Slides slides, Controller driver ){
 
         this.Driver = driver;
         this.arm = arm;
@@ -55,10 +54,7 @@ public class TeleHandler {
 
     public void TeleOp (){
 
-
         slides.RunPid();
-
-
 
         switch (state){
 
@@ -77,8 +73,8 @@ public class TeleHandler {
                                 )
                 );
 
-                Driver.triggerPressed(Driver :: RT , 0.95,() -> slides.slideAdjust(true));
-                Driver.triggerPressed(Driver :: LT , 0.95,() -> slides.slideAdjust(false));
+                Driver.triggerPressed(Driver :: RT, 0.95, () -> slides.Adjust(true));
+                Driver.triggerPressed(Driver :: LT, 0.95, () -> slides.Adjust(false));
 
             break;
 
@@ -86,10 +82,10 @@ public class TeleHandler {
 
                 Driver.buttonPressed(Driver :: y, slides :: diffMove);
 
-                Driver.triggerPressed(Driver :: RT , 0.95,() -> slides.slideAdjust(true));
-                Driver.triggerPressed(Driver :: LT , 0.95,() -> slides.slideAdjust(false));
+                Driver.triggerPressed(Driver :: RT, 0.95, () -> slides.Adjust(true));
+                Driver.triggerPressed(Driver :: LT, 0.95, () -> slides.Adjust(false));
 
-                Driver.buttonPressed(Driver :: b, arm::ServoToRight , ()-> state = States.REGULAR);
+                Driver.buttonPressed(Driver :: b, arm::ServoToRight, ()-> state = States.REGULAR);
 
             break;
 

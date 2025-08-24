@@ -13,11 +13,11 @@ import java.util.function.Supplier;
 This Class is meant to simplify controller inputs
  */
 
-public class ControllerWrapper {
+public class Controller {
 
     private final Gamepad gamepad;
     private final CommandScheduler scheduler;
-    public ControllerWrapper(Gamepad gamepad, CommandScheduler scheduler) {
+    public Controller(Gamepad gamepad, CommandScheduler scheduler) {
 
         this.gamepad = gamepad;
         this.scheduler = scheduler;

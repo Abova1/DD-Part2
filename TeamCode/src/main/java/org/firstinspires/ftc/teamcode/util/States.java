@@ -4,4 +4,6 @@ public enum States {
     REGULAR,
     INVERTED
 
+
 }
+

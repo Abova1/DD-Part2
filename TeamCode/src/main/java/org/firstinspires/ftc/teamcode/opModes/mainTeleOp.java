@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystems.*;
+import org.firstinspires.ftc.teamcode.subsystems.Slides.Slides;
 import org.firstinspires.ftc.teamcode.util.*;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 
@@ -11,8 +12,8 @@ import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 public class mainTeleOp extends LinearOpMode {
 
     private DT DT;
-    private Slides Slides;
-    private ControllerWrapper Driver, Operator;
+    private org.firstinspires.ftc.teamcode.subsystems.Slides.Slides Slides;
+    private Controller Driver, Operator;
 
     private CommandScheduler scheduler;
 
@@ -32,6 +33,7 @@ public class mainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             Slides.setPIDF();
+
 
             DT.Drive(-Driver.getLy(), Driver.getLx() * 1.1, Driver.getRx());
 

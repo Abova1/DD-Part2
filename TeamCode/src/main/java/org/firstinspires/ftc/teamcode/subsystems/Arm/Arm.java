@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.subsystems;
+package org.firstinspires.ftc.teamcode.subsystems.Arm;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,46 +9,34 @@ public class Arm {
 
     public Servo servo;
 
+    private final double initPos = Values.initPos;
+    private final double
+            middle = Values.middle,
+            left = Values.left,
+            right = Values.right
+    ;
+    private final double
+            invertedMiddle = Values.invertedMiddle,
+            invertedLeft = Values.invertedLeft,
+            invertedRight = Values.invertedRight
+    ;
+
     public Arm(HardwareMap hardwareMap) {
         servo = hardwareMap.servo.get("servo");
+
+        init();
     }
 
     public void init(){
         //put whatever the values are
-        servo.setPosition(initPos());
+        servo.setPosition(initPos);
     }
 
     public double getPos(){
         return servo.getPosition();
     }
 
-    public double initPos(){
-        return 0;
-    }
 
-    public double middle() {
-        return 0.5;
-    }
-
-    public double left() {
-        return 0.0;
-    }
-
-    public double right() {
-        return 1.0;
-    }
-
-    public double InvertedMiddle() {
-        return 0.0;
-    }
-
-    public double InvertedLeft() {
-        return 1.0;
-    }
-
-    public double InvertedRight() {
-        return 0.5;
-    }
 
 
     public Command ServoToMiddle(){
@@ -59,7 +47,7 @@ public class Arm {
             @Override
             public void execute() {
 
-                servo.setPosition(middle());
+                servo.setPosition(middle);
 
             }
 
@@ -81,7 +69,7 @@ public class Arm {
             @Override
             public void execute() {
 
-                servo.setPosition(left());
+                servo.setPosition(left);
 
             }
 
@@ -103,7 +91,7 @@ public class Arm {
             @Override
             public void execute() {
 
-                servo.setPosition(right());
+                servo.setPosition(right);
 
             }
 
@@ -125,7 +113,7 @@ public class Arm {
             @Override
             public void execute() {
 
-                servo.setPosition(InvertedMiddle());
+                servo.setPosition(invertedMiddle);
 
             }
 
@@ -147,7 +135,7 @@ public class Arm {
             @Override
             public void execute() {
 
-                servo.setPosition(InvertedLeft());
+                servo.setPosition(invertedLeft);
 
             }
 
@@ -168,7 +156,7 @@ public class Arm {
 
             @Override
             public void execute() {
-                servo.setPosition(InvertedRight());
+                servo.setPosition(invertedRight);
             }
 
             @Override
