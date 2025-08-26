@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.opModes;
 
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -43,6 +44,8 @@ public class visionOpmode extends LinearOpMode {
             }
         });
 
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
         waitForStart();
         if (isStopRequested()) return;
 
@@ -52,6 +55,11 @@ public class visionOpmode extends LinearOpMode {
             telemetry.addData("blueCenter Y", pipeline.blueCenterY);
             telemetry.addData("yellowCenter X", pipeline.yellowCenterX);
             telemetry.addData("yellowCenter Y", pipeline.yellowCenterY);
+
+            telemetry.addData("Blue Width", pipeline.blueWidth);
+            telemetry.addData("Blue Height", pipeline.blueHeight);
+            telemetry.addData("Yellow Width", pipeline.yellowWidth);
+            telemetry.addData("Yellow Height", pipeline.yellowHeight);
 
             telemetry.update();
 
