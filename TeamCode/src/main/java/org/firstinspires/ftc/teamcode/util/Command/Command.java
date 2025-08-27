@@ -10,4 +10,8 @@ public interface Command {
     boolean isFinished();
     void end();
 
+    default void cancel(){
+        end();
+    }
+
 }

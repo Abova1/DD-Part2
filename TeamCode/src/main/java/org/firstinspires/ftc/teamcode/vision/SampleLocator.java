@@ -40,7 +40,7 @@ public class SampleLocator extends OpenCvPipeline {
         Imgproc.cvtColor(input, hsv, Imgproc.COLOR_RGB2HSV);
 
         Scalar lowerBlue = new Scalar(100, 150, 100);
-        Scalar upperBlue = new Scalar(150, 255, 255);
+        Scalar upperBlue = new Scalar(165, 255, 255);
 
         Scalar lowerYellow = new Scalar(20, 100, 100);
         Scalar upperYellow = new Scalar(55, 255, 255);
@@ -85,7 +85,7 @@ public class SampleLocator extends OpenCvPipeline {
 
 
                     boolean square = difference < 28.5;
-                    boolean tooMuch = bluePercentage > 65.0;
+                    boolean tooMuch = bluePercentage > 63;
 
 
                     if (square && tooMuch) {
@@ -168,7 +168,7 @@ public class SampleLocator extends OpenCvPipeline {
 
 
                     boolean square = difference < 28.5;
-                    boolean tooMuch = yellowPercentage > 65.0;
+                    boolean tooMuch = yellowPercentage > 63;
 
 
                     if (square && tooMuch) {

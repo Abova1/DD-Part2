@@ -51,6 +51,7 @@ public class visionOpmode extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+
             telemetry.addData("blueCenter X", pipeline.blueCenterX);
             telemetry.addData("blueCenter Y", pipeline.blueCenterY);
             telemetry.addData("yellowCenter X", pipeline.yellowCenterX);

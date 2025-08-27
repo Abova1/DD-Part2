@@ -23,11 +23,25 @@ public class CommandScheduler {
 
             if(command.isFinished()){
 
+                command.end();
+
                 iterator.remove();
             }
 
         }
 
+    }
+
+    public void cancel(Command command) {
+        if (activeCommands.remove(command)) {
+            command.cancel();
+        }
+    }
+
+    public void cancelAll() {
+        for (Command cmd : new ArrayList<>(activeCommands)) {
+            cancel(cmd);
+        }
     }
 
 

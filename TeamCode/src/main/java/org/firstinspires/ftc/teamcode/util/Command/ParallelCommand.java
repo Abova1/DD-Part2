@@ -49,7 +49,7 @@ public class ParallelCommand implements Command{
     public void end() {
 
         for (Command command : commands){
-            command.execute();
+            command.end();
         }
     }
 
