@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.Controller;
+import org.firstinspires.ftc.teamcode.vision.BlueSampleLocator;
 import org.firstinspires.ftc.teamcode.vision.SampleLocator;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -15,9 +16,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
 @TeleOp
-public class VisionSSOpMode extends LinearOpMode {
+public class blueVisionSS extends LinearOpMode {
     OpenCvCamera webcam;
-    SampleLocator pipeline;
+
+    BlueSampleLocator pipeline;
 
     CommandScheduler scheduler;
 
@@ -34,7 +36,7 @@ public class VisionSSOpMode extends LinearOpMode {
         webcam = OpenCvCameraFactory.getInstance().createWebcam(
                 hardwareMap.get(WebcamName.class, "Webcam 1"));
 
-        pipeline = new SampleLocator();
+        pipeline = new BlueSampleLocator();
         webcam.setPipeline(pipeline);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -65,7 +67,7 @@ public class VisionSSOpMode extends LinearOpMode {
             }
 
 
-            telemetry.addData("BLUE SS INFO: " , pipeline.BlueSSInfo);
+            telemetry.addData("BLUE SS INFO: " , pipeline.blueSSInfo);
             telemetry.addLine();
             telemetry.addData("YELLOW SS INFO: " , pipeline.YellowSSInfo);
 

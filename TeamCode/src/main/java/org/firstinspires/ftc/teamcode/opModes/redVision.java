@@ -5,19 +5,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.vision.RedSampleLocator;
 import org.firstinspires.ftc.teamcode.vision.SampleLocator;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 
 @TeleOp
-public class visionOpmode extends LinearOpMode {
+public class redVision extends LinearOpMode {
 
     OpenCvCamera webcam;
-    SampleLocator pipeline;
+    RedSampleLocator pipeline;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,7 +25,7 @@ public class visionOpmode extends LinearOpMode {
         webcam = OpenCvCameraFactory.getInstance().createWebcam(
                 hardwareMap.get(WebcamName.class, "Webcam 1"));
 
-        pipeline = new SampleLocator();
+        pipeline = new RedSampleLocator();
         webcam.setPipeline(pipeline);
 
 
@@ -46,15 +46,16 @@ public class visionOpmode extends LinearOpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
+
+
         waitForStart();
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
 
-
-            telemetry.addData("Blue Stream Info: ", pipeline.BlueStreamInfo);
-            telemetry.addLine();
             telemetry.addData("Yellow Stream Info: ", pipeline.YellowStreamInfo);
+            telemetry.addLine();
+            telemetry.addData("Red Stream Info: ", pipeline.redStreamInfo);
 
 
             telemetry.update();
