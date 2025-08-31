@@ -9,29 +9,29 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.Controller;
 import org.firstinspires.ftc.teamcode.vision.BlueSampleLocator;
-import org.firstinspires.ftc.teamcode.vision.SampleLocator;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import com.bylazar.telemetry.PanelsTelemetry;
+import com.bylazar.telemetry.TelemetryManager;
+import com.bylazar.gamepad.Gamepad;
 
 
 @TeleOp
 public class blueVisionSS extends LinearOpMode {
+
     OpenCvCamera webcam;
-
     BlueSampleLocator pipeline;
-
     CommandScheduler scheduler;
-
     Controller gp1;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        gp1 = new Controller(gamepad1, scheduler);
+        scheduler = new CommandScheduler();
 
-        scheduler = new CommandScheduler();;
+        gp1 = new Controller(gamepad1, scheduler);
 
         webcam = OpenCvCameraFactory.getInstance().createWebcam(
                 hardwareMap.get(WebcamName.class, "Webcam 1"));
@@ -44,7 +44,6 @@ public class blueVisionSS extends LinearOpMode {
             public void onOpened() {
                 webcam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
                 FtcDashboard.getInstance().startCameraStream(webcam, 60);
-
             }
 
             @Override
