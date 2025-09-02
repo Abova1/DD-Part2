@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opModes;
+package org.firstinspires.ftc.teamcode.opModes.TeleOp;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -8,34 +8,32 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 import org.firstinspires.ftc.teamcode.util.Controller;
-import org.firstinspires.ftc.teamcode.vision.RedSampleLocator;
-import org.firstinspires.ftc.teamcode.vision.SampleLocator;
+import org.firstinspires.ftc.teamcode.vision.BlueSampleLocator;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 
 @TeleOp
-public class redVisionSS extends LinearOpMode {
+public class blueVisionSS extends LinearOpMode {
+
     OpenCvCamera webcam;
-    RedSampleLocator pipeline;
-
+    BlueSampleLocator pipeline;
     CommandScheduler scheduler;
-
     Controller gp1;
 
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        gp1 = new Controller(gamepad1, scheduler);
+        scheduler = new CommandScheduler();
 
-        scheduler = new CommandScheduler();;
+        gp1 = new Controller(gamepad1, scheduler);
 
         webcam = OpenCvCameraFactory.getInstance().createWebcam(
                 hardwareMap.get(WebcamName.class, "Webcam 1"));
 
-        pipeline = new RedSampleLocator();
+        pipeline = new BlueSampleLocator();
         webcam.setPipeline(pipeline);
 
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
@@ -43,7 +41,6 @@ public class redVisionSS extends LinearOpMode {
             public void onOpened() {
                 webcam.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
                 FtcDashboard.getInstance().startCameraStream(webcam, 60);
-
             }
 
             @Override
@@ -65,9 +62,10 @@ public class redVisionSS extends LinearOpMode {
                 pipeline.SS = true;
             }
 
-            telemetry.addData("YELLOW SS INFO: " , pipeline.YellowSSInfo);
+
+            telemetry.addData("BLUE SS INFO: " , pipeline.blueSSInfo);
             telemetry.addLine();
-            telemetry.addData("RED SS INFO: " , pipeline.redSSInfo);
+            telemetry.addData("YELLOW SS INFO: " , pipeline.YellowSSInfo);
 
             telemetry.update();
 

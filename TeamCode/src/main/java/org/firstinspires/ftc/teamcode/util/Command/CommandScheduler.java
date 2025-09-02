@@ -10,6 +10,8 @@ public class CommandScheduler {
         command.init();
         activeCommands.add(command);
 
+
+
     }
 
     public void run(){
@@ -24,8 +26,8 @@ public class CommandScheduler {
             if(command.isFinished()){
 
                 command.end();
-
                 iterator.remove();
+
             }
 
         }
@@ -33,8 +35,8 @@ public class CommandScheduler {
     }
 
     public void cancel(Command command) {
-        if (activeCommands.remove(command)) {
-            command.cancel();
+        if(activeCommands.remove(command)){
+            command.end();
         }
     }
 

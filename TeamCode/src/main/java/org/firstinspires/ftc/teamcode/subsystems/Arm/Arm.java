@@ -2,12 +2,17 @@ package org.firstinspires.ftc.teamcode.subsystems.Arm;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.util.Command.Command;
+import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
+import org.firstinspires.ftc.teamcode.util.Globals;
 
 public class Arm {
 
     public Servo servo;
+    public ElapsedTime servoTimer = new ElapsedTime();
+    public CommandScheduler scheduler;
 
     private final double initPos = Values.initPos;
     private final double
@@ -36,13 +41,17 @@ public class Arm {
         return servo.getPosition();
     }
 
-
-
-
     public Command ServoToMiddle(){
         return new Command() {
+            long timeNeeded;
+
             @Override
-            public void init() {}
+            public void init() {
+
+                servoTimer.reset();
+
+                timeNeeded = Globals.CHUBArmEstimates(Globals.CHUB_SERVO_TYPES.GOBUILDA_TORQUE, 1, 0,0, Math.abs(Globals.getAngle(Globals.SERVO_TYPES_ANGLES.GOBUILDA, getPos()) - 150));
+            }
 
             @Override
             public void execute() {
@@ -53,7 +62,7 @@ public class Arm {
 
             @Override
             public boolean isFinished() {
-                return true;
+                return servoTimer.milliseconds() >= timeNeeded;
             }
 
             @Override
@@ -75,7 +84,7 @@ public class Arm {
 
             @Override
             public boolean isFinished() {
-                return true;
+                return servo.getPosition() == left;
             }
 
             @Override
@@ -85,8 +94,18 @@ public class Arm {
 
     public Command ServoToRight(){
         return new Command() {
+            long timeNeeded;
+
+
             @Override
-            public void init() {}
+            public void init() {
+
+
+
+                servoTimer.reset();
+
+                timeNeeded = Globals.CHUBArmEstimates(Globals.CHUB_SERVO_TYPES.GOBUILDA_TORQUE,1, 0,0, Math.abs(Globals.getAngle(Globals.SERVO_TYPES_ANGLES.GOBUILDA, getPos()) - 300));
+            }
 
             @Override
             public void execute() {
@@ -97,7 +116,8 @@ public class Arm {
 
             @Override
             public boolean isFinished() {
-                return true;
+
+                return servoTimer.milliseconds() >= timeNeeded;
             }
 
             @Override
@@ -107,6 +127,8 @@ public class Arm {
 
     public Command InvertedServoToMiddle(){
         return new Command() {
+
+
             @Override
             public void init() {}
 
@@ -141,7 +163,7 @@ public class Arm {
 
             @Override
             public boolean isFinished() {
-                return true;
+                return servo.getPosition() == invertedLeft;
             }
 
             @Override

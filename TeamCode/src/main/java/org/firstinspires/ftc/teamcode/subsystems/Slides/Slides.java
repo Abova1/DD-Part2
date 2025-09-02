@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.util.Command.Command;
 import org.firstinspires.ftc.teamcode.util.PID;
-import org.firstinspires.ftc.teamcode.subsystems.Slides.Values;
 
 public class Slides {
 
@@ -23,18 +22,18 @@ public class Slides {
     public Slides(HardwareMap hardwareMap){
 
         motor1 = hardwareMap.get(DcMotorEx.class, "motor0");
-        motor2 = hardwareMap.get(DcMotorEx.class, "motor1");
+//        motor2 = hardwareMap.get(DcMotorEx.class, "motor1");
         motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         reset();
 
     }
     public void reset(){
         motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        motor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         targetPos = 0;
     }
 
@@ -49,7 +48,7 @@ public class Slides {
         double Power = calc;
 
         motor1.setPower(Power);
-        motor2.setPower(Power);
+//        motor2.setPower(Power);
 
 
     }
@@ -91,7 +90,8 @@ public class Slides {
             }
 
             @Override
-            public void end() {}
+            public void end() {
+            }
 
         };
     }

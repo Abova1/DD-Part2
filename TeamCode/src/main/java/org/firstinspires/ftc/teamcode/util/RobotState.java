@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode.util;
 
-public enum States {
+public enum RobotState {
     REGULAR,
     INVERTED
-
-
 }
-
