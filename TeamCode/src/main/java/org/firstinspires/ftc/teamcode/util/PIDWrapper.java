@@ -10,13 +10,10 @@ import java.util.List;
 public class PIDWrapper {
 
     private PIDFController PIDF;
-    private List<DcMotorEx> motors;
 
-
-    public PIDWrapper(PIDFController pidf , DcMotorEx... motors) {
+    public PIDWrapper(PIDFController pidf) {
 
         this.PIDF = pidf;
-        this.motors = Arrays.asList(motors);
 
     }
 
