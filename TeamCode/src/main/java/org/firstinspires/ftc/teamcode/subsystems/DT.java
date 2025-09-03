@@ -8,15 +8,18 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class DT {
+    private VoltageSensor sensor;
+
 
     private DcMotorEx FL, BL, FR, BR;
 
 
-    public DT (HardwareMap hardwareMap) {
+    public DT (HardwareMap hardwareMap, VoltageSensor sensor) {
 
         FL = hardwareMap.get(DcMotorEx.class, "FL");
         BL = hardwareMap.get(DcMotorEx.class, "BL");
@@ -25,9 +28,14 @@ public class DT {
 
         FR.setDirection(DcMotorSimple.Direction.REVERSE);
         BR.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        this.sensor = sensor;
+
     }
 
     public void Drive (double y, double x, double rx) {
+        double voltage = sensor.getVoltage();
+        double shorterOutPut = 0.75;
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
         double frontLeftPower = (y + x + rx) / denominator;
@@ -36,10 +44,18 @@ public class DT {
         double backRightPower = (y + x - rx) / denominator;
 
 
-        FL.setPower(frontLeftPower);
-        BL.setPower(backLeftPower);
-        FR.setPower(frontRightPower);
-        BR.setPower(backRightPower);
+        if(voltage > 13){
+            FL.setPower(frontLeftPower);
+            BL.setPower(backLeftPower);
+            FR.setPower(frontRightPower);
+            BR.setPower(backRightPower);
+        }
+        else{
+            FL.setPower(frontLeftPower * shorterOutPut);
+            BL.setPower(backLeftPower * shorterOutPut);
+            FR.setPower(frontRightPower * shorterOutPut);
+            BR.setPower(backRightPower * shorterOutPut);
+        }
 
     }
 

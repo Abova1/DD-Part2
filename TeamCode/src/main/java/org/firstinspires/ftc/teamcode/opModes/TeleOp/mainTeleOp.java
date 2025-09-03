@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opModes.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.teamcode.subsystems.*;
 import org.firstinspires.ftc.teamcode.subsystems.Slides.Slides;
@@ -12,7 +13,9 @@ import org.firstinspires.ftc.teamcode.util.Command.CommandScheduler;
 public class mainTeleOp extends LinearOpMode {
 
     private DT DT;
-    private org.firstinspires.ftc.teamcode.subsystems.Slides.Slides Slides;
+    private Slides slides;
+
+    private VoltageSensor vs;
     private Controller Driver, Operator;
 
     private CommandScheduler scheduler;
@@ -21,9 +24,9 @@ public class mainTeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-
-        DT = new DT(hardwareMap);
-        Slides = new Slides(hardwareMap);
+        vs = hardwareMap.get(VoltageSensor.class, "Control Hub");
+        DT = new DT(hardwareMap, vs);
+        slides = new Slides(hardwareMap);
 
 
         waitForStart();
@@ -31,9 +34,6 @@ public class mainTeleOp extends LinearOpMode {
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
-
-            Slides.setPIDF();
-
 
             DT.Drive(-Driver.getLy(), Driver.getLx() * 1.1, Driver.getRx());
 

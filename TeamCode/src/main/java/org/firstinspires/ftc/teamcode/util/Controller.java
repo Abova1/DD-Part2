@@ -175,7 +175,7 @@ public class Controller {
         return gamepad.dpad_left && !previousGamepad.dpad_left;
     }
     public boolean REDPUP(){
-        return gamepad.dpad_up && !previousGamepad.dpad_left;
+        return gamepad.dpad_up && !previousGamepad.dpad_up;
     }
     public boolean REDPDOWN(){
         return gamepad.dpad_down && !previousGamepad.dpad_down;

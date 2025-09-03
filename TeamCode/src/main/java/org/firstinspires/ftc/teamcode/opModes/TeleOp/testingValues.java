@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.opModes.TeleOp;
 
+import com.qualcomm.hardware.lynx.LynxVoltageSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystems.Arm.Arm;
@@ -18,6 +20,7 @@ public class testingValues extends LinearOpMode {
     private Slides slides;
     private TeleHandler teleHandler;
     private CommandScheduler scheduler;
+    private VoltageSensor vs;
     private ElapsedTime timer;
 
 
@@ -32,12 +35,16 @@ public class testingValues extends LinearOpMode {
         slides = new Slides(hardwareMap);
         teleHandler = new TeleHandler(arm, slides, Driver);
 
+        vs = hardwareMap.get(VoltageSensor.class, "Control Hub");
+
         timer = new ElapsedTime();
 
         waitForStart();
         if (isStopRequested()) return;
 
         while (opModeIsActive()) {
+
+            double voltage = vs.getVoltage();
 
             scheduler.run();
             teleHandler.TeleOp();
@@ -46,6 +53,7 @@ public class testingValues extends LinearOpMode {
             telemetry.addData("Current State", teleHandler.getState());
             telemetry.addData("ServoPos", arm.getPos());
             telemetry.addData("motorPos", slides.getPos());
+            telemetry.addData("Voltage", voltage);
 
             telemetry.update();
         }

@@ -35,7 +35,7 @@ public class TeleHandler {
 
     public void TeleOp (){
 
-        slides.RunPid();
+        slides.run();
 
         servoToMotor = new SequentialCommand(
                 arm.ServoToMiddle(),

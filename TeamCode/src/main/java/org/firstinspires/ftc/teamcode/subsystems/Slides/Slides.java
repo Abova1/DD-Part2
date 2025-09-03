@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.util.Command.Command;
-import org.firstinspires.ftc.teamcode.util.PID;
+import org.firstinspires.ftc.teamcode.util.PIDWrapper;
 
 public class Slides {
 
@@ -17,7 +17,7 @@ public class Slides {
     private double targetPos = Values.targetPos;
     private final double zero = Values.zero, adjust = Values.adjust, up = Values.up;
 
-    private PID pid = new PID(new PIDFController (p, i, d, f));
+    private PIDWrapper pid = new PIDWrapper(new PIDFController (p, i, d, f));
 
     public Slides(HardwareMap hardwareMap){
 
@@ -37,33 +37,17 @@ public class Slides {
         targetPos = 0;
     }
 
-    public void RunPid(){
-
-        setPIDF();
-
-        double currentPos = getPos();
-
-        double calc = pid.calculate(currentPos, targetPos);
-
-        double Power = calc;
-
-        motor1.setPower(Power);
-//        motor2.setPower(Power);
-
-
-    }
-
-    public void setPIDF(){
-
-        pid.setPIDF(p, i, d, f);
-
-    }
-
     //use the most accurate motor
     public double getPos(){
         return motor1.getCurrentPosition();
     }
 
+    public void run(){
+
+        pid.setPIDF(p, i, d, f);
+        pid.run(getPos(), targetPos, motor1);
+
+    }
 
 
     public Command moveToTarget(){
