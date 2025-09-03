@@ -7,10 +7,10 @@ public class CommandScheduler {
 
     public void schedule(Command command){
 
-        command.init();
-        activeCommands.add(command);
-
-
+        if(!activeCommands.contains(command)){
+            command.init();
+            activeCommands.add(command);
+        }
 
     }
 
@@ -25,7 +25,7 @@ public class CommandScheduler {
 
             if(command.isFinished()){
 
-                command.end();
+                command.end(false);
                 iterator.remove();
 
             }
@@ -34,9 +34,15 @@ public class CommandScheduler {
 
     }
 
+    public boolean isScheduled(Command command){
+        return activeCommands.contains(command);
+    }
+
     public void cancel(Command command) {
-        if(activeCommands.remove(command)){
-            command.end();
+        boolean active = activeCommands.remove(command);
+
+        if(active){
+            command.end(true);
         }
     }
 

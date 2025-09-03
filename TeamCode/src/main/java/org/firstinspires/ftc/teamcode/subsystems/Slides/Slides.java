@@ -90,7 +90,7 @@ public class Slides {
             }
 
             @Override
-            public void end() {
+            public void end(boolean cancelled) {
             }
 
         };
@@ -113,12 +113,12 @@ public class Slides {
             public boolean isFinished() {
 
                 int error = (int) Math.abs(getPos() - targetPos);
-                return error <= 20;
+                return error <= 10;
 
             }
 
             @Override
-            public void end() {}
+            public void end(boolean cancelled) {}
         };
     }
 
@@ -152,7 +152,7 @@ public class Slides {
             }
 
             @Override
-            public void end() {}
+            public void end(boolean cancelled) {}
         };
     }
 

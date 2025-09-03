@@ -16,18 +16,26 @@ This Class is meant to simplify controller inputs
 public class Controller {
 
     private final Gamepad gamepad;
+    private final Gamepad previousGamepad = new Gamepad();
     private final CommandScheduler scheduler;
+
     public Controller(Gamepad gamepad, CommandScheduler scheduler) {
 
         this.gamepad = gamepad;
         this.scheduler = scheduler;
 
     }
+    public void Update(){
+        previousGamepad.copy(gamepad);
+    }
 
     public void buttonPressed(BooleanSupplier wasPressed, Supplier<Command> commandSupplier){
 
         if(wasPressed.getAsBoolean()){
-            scheduler.schedule(commandSupplier.get());
+            Command command = commandSupplier.get();
+            if(!scheduler.isScheduled(command)){
+                scheduler.schedule(command);
+            }
         }
 
     }
@@ -35,7 +43,10 @@ public class Controller {
     public void buttonPressed(BooleanSupplier wasPressed, Supplier<Command> commandSupplier, Runnable action){
 
         if(wasPressed.getAsBoolean()){
-            scheduler.schedule(commandSupplier.get());
+            Command command = commandSupplier.get();
+            if(!scheduler.isScheduled(command)){
+                scheduler.schedule(commandSupplier.get());
+            }
             action.run();
         }
 
@@ -134,6 +145,42 @@ public class Controller {
         return gamepad.left_trigger;
     }
 
+    //RISING EDGE CONTROLS
 
-    
+    public boolean REa(){
+        return gamepad.a && !previousGamepad.a;
+    }
+
+    public boolean REb(){
+        return gamepad.b && !previousGamepad.b;
+    }
+    public boolean REx(){
+        return gamepad.x && !previousGamepad.x;
+    }
+    public boolean REy() {
+        return gamepad.y && !previousGamepad.y;
+    }
+
+    public boolean RERB(){
+        return gamepad.right_bumper && !previousGamepad.right_bumper;
+    }
+    public boolean RELB(){
+        return gamepad.left_bumper && !previousGamepad.left_bumper;
+    }
+
+    public boolean REDPR(){
+        return gamepad.dpad_right && !previousGamepad.dpad_right;
+    }
+    public boolean REDPL(){
+        return gamepad.dpad_left && !previousGamepad.dpad_left;
+    }
+    public boolean REDPUP(){
+        return gamepad.dpad_up && !previousGamepad.dpad_left;
+    }
+    public boolean REDPDOWN(){
+        return gamepad.dpad_down && !previousGamepad.dpad_down;
+    }
+
+
+
 }

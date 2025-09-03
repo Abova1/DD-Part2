@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.util.Command;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,10 +45,10 @@ public class ParallelCommand implements Command{
     }
 
     @Override
-    public void end() {
+    public void end(boolean cancelled) {
 
         for (Command command : commands){
-            command.end();
+            command.end(false);
         }
     }
 

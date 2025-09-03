@@ -41,6 +41,7 @@ public class testingValues extends LinearOpMode {
 
             scheduler.run();
             teleHandler.TeleOp();
+            Driver.Update();
 
             telemetry.addData("Current State", teleHandler.getState());
             telemetry.addData("ServoPos", arm.getPos());

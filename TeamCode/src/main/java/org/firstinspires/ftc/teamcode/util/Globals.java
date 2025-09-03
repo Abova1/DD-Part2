@@ -174,7 +174,7 @@ public class Globals {
                 return finished;
             }
             @Override
-            public void end() {}
+            public void end(boolean cancelled) {}
         };
     }
 

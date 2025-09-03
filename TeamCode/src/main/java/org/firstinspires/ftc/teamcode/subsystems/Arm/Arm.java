@@ -66,14 +66,21 @@ public class Arm {
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){}
         };
     }
 
     public Command ServoToLeft(){
         return new Command() {
+            long timeNeeded;
+
             @Override
-            public void init() {}
+            public void init() {
+
+                servoTimer.reset();
+
+                timeNeeded = Globals.CHUBArmEstimates(Globals.CHUB_SERVO_TYPES.GOBUILDA_TORQUE, 1, 0,0, Math.abs(Globals.getAngle(Globals.SERVO_TYPES_ANGLES.GOBUILDA, getPos()) - 0));
+            }
 
             @Override
             public void execute() {
@@ -84,11 +91,12 @@ public class Arm {
 
             @Override
             public boolean isFinished() {
-                return servo.getPosition() == left;
+                return servoTimer.milliseconds() > timeNeeded && getPos() == left;
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){
+            }
         };
     }
 
@@ -99,8 +107,6 @@ public class Arm {
 
             @Override
             public void init() {
-
-
 
                 servoTimer.reset();
 
@@ -121,7 +127,7 @@ public class Arm {
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){}
         };
     }
 
@@ -145,7 +151,7 @@ public class Arm {
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){}
         };
     }
 
@@ -167,7 +173,7 @@ public class Arm {
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){}
         };
     }
 
@@ -187,7 +193,7 @@ public class Arm {
             }
 
             @Override
-            public void end(){}
+            public void end(boolean cancelled){}
         };
     }
 

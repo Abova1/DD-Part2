@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.util.Command;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import java.util.*;
 
 public class SequentialCommand implements Command {
@@ -28,7 +26,7 @@ public class SequentialCommand implements Command {
         current.execute();
 
         if (current.isFinished()) {
-            current.end();
+            current.end(false);
 
             if (!commands.isEmpty()) {
                 current = commands.poll();
@@ -45,9 +43,9 @@ public class SequentialCommand implements Command {
     }
 
     @Override
-    public void end() {
+    public void end(boolean cancelled) {
         if (current != null) {
-            current.end();
+            current.end(false);
         }
     }
 }
